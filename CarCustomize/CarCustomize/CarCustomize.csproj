@@ -159,24 +159,6 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\0.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\3.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\4.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\5.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="images\0.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -207,13 +189,13 @@
     <None Include="Resources\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="images\arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="images\arrow_down.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="images\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\unknown.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,7 +19,7 @@ namespace CarCustomize.Forms
 
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			System.Diagnostics.Process.Start("https://discord.gg/gFy9sf");
+			System.Diagnostics.Process.Start("https://discord.gg/DxC6Fyf");
 		}
 	}
 }

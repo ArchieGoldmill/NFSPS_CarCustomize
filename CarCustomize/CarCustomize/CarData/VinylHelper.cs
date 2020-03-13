@@ -22,6 +22,11 @@ namespace CarCustomize.CarData
 
 		public static Bitmap GetImage(int code, int page)
 		{
+			if(page > 5 || code > 0xFF)
+			{
+				return Resources.unknown;
+			}
+
 			int hash = BitConverter.ToUInt16(new byte[] { (byte)code, (byte)page }, 0);
 
 			if (imageCache.ContainsKey(hash))

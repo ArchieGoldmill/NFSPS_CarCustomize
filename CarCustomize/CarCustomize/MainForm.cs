@@ -81,6 +81,14 @@ namespace CarCustomize
 
 			this.InitComboBox(this.LicensePlate, Constants.LicensePlate);
 
+			//this.InitComboBox(this.Engine, Constants.PerformanceParts);
+			//this.InitComboBox(this.Nos, Constants.PerformanceParts);
+			//this.InitComboBox(this.Drivetrain, Constants.PerformanceParts);
+			//this.InitComboBox(this.Tires, Constants.PerformanceParts);
+			//this.InitComboBox(this.Suspension, Constants.PerformanceParts);
+			//this.InitComboBox(this.Turbo, Constants.PerformanceParts);
+			//this.InitComboBox(this.Brakes, Constants.PerformanceParts);
+
 			this.CarMode.DisplayMember = "Key";
 			this.CarMode.ValueMember = "Value";
 			this.CarMode.DataSource = new BindingSource(Constants.CarModes, null);
@@ -107,6 +115,11 @@ namespace CarCustomize
 
 			this.openFileDialog.Filter = "NFS PS Car data|*.nfspscd";
 			this.openFileDialog.Title = "Open car data";
+
+			var perf = this.tabControl.TabPages[2];
+			var misc = this.tabControl.TabPages[3];
+			this.tabControl.TabPages.Remove(perf);
+			this.tabControl.TabPages.Remove(misc);
 		}
 
 		private void InitGrids()
@@ -638,14 +651,16 @@ namespace CarCustomize
 		{
 			if (this.settings.ShowCarModesMessage)
 			{
-				this.dialogForm = new DontShowAgainForm("The game gets car mode from the first blueprint.\n" +
+				var form = new DontShowAgainForm("The game gets car mode from the first blueprint.\n" +
 														"However you can still set different car modes \nfor each blueprint");
+
+				this.dialogForm = form;
 
 				this.dialogForm.ShowDialog();
 
 				this.dialogForm = null;
 
-				this.settings.ShowCarModesMessage = false;
+				this.settings.ShowCarModesMessage = !form.DontShow;
 				this.settings.Save();
 			}
 		}

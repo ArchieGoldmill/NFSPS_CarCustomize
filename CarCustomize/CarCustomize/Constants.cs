@@ -113,7 +113,8 @@ namespace CarCustomize
 			{"BumperFront", 0x56C},
 			{"BumperRear", 0x577},
 			{"Skirts", 0x582},
-			{"Spoiler", 0x5FB}
+			{"Spoiler", 0x5FB},
+			{"Exhaust", 0x61C},
 		};
 
 		public static Dictionary<string, byte> BodyParts = new Dictionary<string, byte>
@@ -220,6 +221,21 @@ namespace CarCustomize
 			{"Kit 13", 0x1D},
 			{"Kit 14", 0x1E},
 			{"Kit 15", 0x1F},
+		};
+
+		public static Dictionary<string, byte> PerformanceParts = new Dictionary<string, byte>
+		{
+			{"Default", 0xff},
+			{"Stock", 0},
+			{"Tier 1 (1)", 0x1},
+			{"Tier 1 (2)", 0x2},
+			{"Tier 1 (3)", 0x3},
+			{"Tier 2 (1)", 0x4},
+			{"Tier 2 (2)", 0x5},
+			{"Tier 2 (3)", 0x6},
+			{"Tier 3 (1)", 0x7},
+			{"Tier 3 (2)", 0x8},
+			{"Tier 3 (3)", 0x9},
 		};
 
 		public static Dictionary<uint, string> CarList = new Dictionary<uint, string>
