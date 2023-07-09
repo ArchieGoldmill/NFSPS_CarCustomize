@@ -8,17 +8,17 @@ namespace CarCustomize.CarData
 {
 	public class VinylHelper
 	{
-		private static readonly Bitmap[] images = new[]
-		{
-			Resources._0,
-			Resources._1,
-			Resources._2,
-			Resources._3,
-			Resources._4,
-			Resources._5
-		};
+		public static readonly List<Bitmap> Images = new List<Bitmap>();
 
 		private static Dictionary<int, Bitmap> imageCache = new Dictionary<int, Bitmap>();
+
+		public static void Init()
+		{
+			for(int i =0; i< 6;i++)
+			{
+				Images.Add(new Bitmap($"data\\VinylPage{i}"));
+			}
+		}
 
 		public static Bitmap GetImage(int code, int page)
 		{
@@ -34,7 +34,7 @@ namespace CarCustomize.CarData
 				return imageCache[hash];
 			}
 
-			var img = images[page];
+			var img = Images[page];
 
 			int row = code / 16;
 			int col = code % 16;

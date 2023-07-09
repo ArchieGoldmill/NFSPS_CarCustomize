@@ -7,7 +7,7 @@ namespace CarCustomize
 {
 	public class Settings
 	{
-		private static string fileName = "settings.xml";
+		private static string fileName = "data\\settings.xml";
 
 		public string ProcessName { get; set; } = "nfs";
 
@@ -45,7 +45,7 @@ namespace CarCustomize
 			try
 			{
 				var serializer = new XmlSerializer(typeof(Settings));
-				reader = new StreamReader(Settings.fileName);
+				reader = new StreamReader(fileName);
 				return (Settings)serializer.Deserialize(reader);
 			}
 			finally

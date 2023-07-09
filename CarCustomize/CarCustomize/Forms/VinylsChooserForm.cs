@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using CarCustomize.CarData;
 using CarCustomize.Forms;
 using CarCustomize.Properties;
 
@@ -10,10 +11,6 @@ namespace Customize
 	public partial class VinylsChooserForm : BaseForm
 	{
 		private byte _currentImgNumber;
-
-		private readonly Bitmap[] _images;
-
-		private Graphics graphics;
 
 		public byte Code { get; private set; }
 
@@ -25,18 +22,7 @@ namespace Customize
 		{
 			InitializeComponent();
 
-			this.graphics = this.hexTableImage.CreateGraphics();
-
-			this._images = new[]
-			{
-				Resources._0,
-				Resources._1,
-				Resources._2,
-				Resources._3,
-				Resources._4,
-				Resources._5
-			};
-
+			hexTableImage.Image = VinylHelper.Images[_currentImgNumber];
 			this.numberLabel.Text = $"{_currentImgNumber + 1}/6";
 		}
 
@@ -46,7 +32,7 @@ namespace Customize
 			{
 				_currentImgNumber++;
 
-				hexTableImage.Image = _images[_currentImgNumber];
+				hexTableImage.Image = VinylHelper.Images[_currentImgNumber];
 
 				numberLabel.Text = $"{_currentImgNumber + 1}/6";
 			}
@@ -58,7 +44,7 @@ namespace Customize
 			{
 				_currentImgNumber--;
 
-				hexTableImage.Image = _images[_currentImgNumber];
+				hexTableImage.Image = VinylHelper.Images[_currentImgNumber];
 
 				numberLabel.Text = $"{_currentImgNumber + 1}/6";
 			}

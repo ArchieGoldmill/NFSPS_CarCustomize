@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -30,6 +28,8 @@ namespace CarCustomize
 		public MainForm()
 		{
 			InitializeComponent();
+
+			VinylHelper.Init();
 
 			this.AutoScaleMode = AutoScaleMode.Dpi;
 
