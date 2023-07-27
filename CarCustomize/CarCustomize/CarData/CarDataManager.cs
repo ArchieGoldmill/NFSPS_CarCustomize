@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Drawing;
 using System.Linq;
 using Core;
 
@@ -338,6 +339,14 @@ namespace CarCustomize.CarData
 			this.FixCarParts();
 		}
 
+		public void PasteCopyVinylToCurrentCar()
+		{
+			this.memoryManager.WriteBytes(new IntPtr(this.CarPointer + Constants.VinylsLocation), 
+				this.copy.Skip(Constants.VinylsLocation).Take(Constants.VinylsSectionSize).ToArray());
+
+			this.FixCarParts();
+		}
+
 		private void FixCarParts()
 		{
 			foreach (var val in Constants.CarParts.Values)
@@ -381,6 +390,17 @@ namespace CarCustomize.CarData
 		public void SetCarbonData(string name, bool carbon)
 		{
 			this.memoryManager.WriteByte(new IntPtr(this.CarPointer + Constants.Carbon[name]), carbon ? (byte)1 : (byte)0);
+		}
+
+		// Color
+		public Color GetColor(string part)
+		{
+			int offset = Constants.Colors[part];
+			var hue = this.memoryManager.ReadByte(new IntPtr(this.CarPointer + offset + 2));
+			var sat = this.memoryManager.ReadByte(new IntPtr(this.CarPointer + offset + 2));
+			var val = this.memoryManager.ReadByte(new IntPtr(this.CarPointer + offset + 3));
+
+			return Helper.ColorFromHSV(hue, sat, val);
 		}
 
 		// Misc

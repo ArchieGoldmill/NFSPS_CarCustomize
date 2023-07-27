@@ -7,13 +7,6 @@ using Customize;
 
 namespace CarCustomize.Forms
 {
-	public struct HSVColor
-	{
-		public double Hue;
-		public double Saturation;
-		public double Value;
-	}
-
 	public partial class VinylEditorForm : BaseForm
 	{
 		private CarDataManager carDataManager;
@@ -84,35 +77,7 @@ namespace CarCustomize.Forms
 			var saturation = this.carDataManager.GetVinylData(this.vinylNum, this.isDecal, $"Color{num}_Saturation");
 			var brightness = this.carDataManager.GetVinylData(this.vinylNum, this.isDecal, $"Color{num}_Brightness");
 
-			btn.BackColor = this.ColorFromHSV(
-				360d - (double)hue / Constants.HueMax * 360d,
-				(double)saturation / 0xff,
-				(double)brightness / 0xff);
-		}
-
-		private Color ColorFromHSV(double hue, double saturation, double value)
-		{
-			int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
-			double f = hue / 60 - Math.Floor(hue / 60);
-
-			value = value * 255;
-			int v = Convert.ToInt32(value);
-			int p = Convert.ToInt32(value * (1 - saturation));
-			int q = Convert.ToInt32(value * (1 - f * saturation));
-			int t = Convert.ToInt32(value * (1 - (1 - f) * saturation));
-
-			if (hi == 0)
-				return Color.FromArgb(255, v, t, p);
-			else if (hi == 1)
-				return Color.FromArgb(255, q, v, p);
-			else if (hi == 2)
-				return Color.FromArgb(255, p, v, t);
-			else if (hi == 3)
-				return Color.FromArgb(255, p, q, v);
-			else if (hi == 4)
-				return Color.FromArgb(255, t, p, v);
-			else
-				return Color.FromArgb(255, v, p, q);
+			btn.BackColor = Helper.ColorFromHSV(hue, saturation, brightness);
 		}
 
 		private void InitControl(NumericUpDown control)
@@ -162,30 +127,12 @@ namespace CarCustomize.Forms
 
 		private void WriteColorData(Color color, int num)
 		{
-			var hsv = this.GetHSV(color);
+			var hsv = Helper.GetHSV(color);
 
-			this.carDataManager.SetVinylData(this.vinylNum, this.isDecal, $"Color{num}_Tone",
-				(byte)(((360d - hsv.Hue) / 360d) * 0x59));
-			this.carDataManager.SetVinylData(this.vinylNum, this.isDecal, $"Color{num}_Saturation",
-				(byte)(hsv.Saturation / 100d * 255));
-			this.carDataManager.SetVinylData(this.vinylNum, this.isDecal, $"Color{num}_Brightness",
-				(byte)(hsv.Value / 100d * 255));
+			this.carDataManager.SetVinylData(this.vinylNum, this.isDecal, $"Color{num}_Tone", (byte)hsv.Hue);
+			this.carDataManager.SetVinylData(this.vinylNum, this.isDecal, $"Color{num}_Saturation", (byte)hsv.Saturation);
+			this.carDataManager.SetVinylData(this.vinylNum, this.isDecal, $"Color{num}_Brightness", (byte)(hsv.Value));
 			this.carDataManager.SetVinylData(this.vinylNum, this.isDecal, $"Color{num}_StrangeByte", 06);
-		}
-
-		private HSVColor GetHSV(Color color)
-		{
-			HSVColor toReturn = new HSVColor();
-
-			int max = Math.Max(color.R, Math.Max(color.G, color.B));
-			int min = Math.Min(color.R, Math.Min(color.G, color.B));
-
-			toReturn.Hue = Math.Round(color.GetHue(), 2);
-			toReturn.Saturation = ((max == 0) ? 0 : 1d - (1d * min / max)) * 100;
-			toReturn.Saturation = Math.Round(toReturn.Saturation, 2);
-			toReturn.Value = Math.Round(((max / 255d) * 100), 2);
-
-			return toReturn;
 		}
 
 		private void cancelBtn_Click(object sender, EventArgs e)

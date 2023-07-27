@@ -242,7 +242,7 @@ namespace Core
 
 		private IntPtr GetProcessHandle(string name)
 		{
-			Process[] pList = Process.GetProcesses();
+			var pList = Process.GetProcesses();
 
 			if (pList.Length == 0)
 			{

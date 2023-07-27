@@ -16,7 +16,7 @@ namespace CarCustomize.CarData
 		{
 			for(int i =0; i< 6;i++)
 			{
-				Images.Add(new Bitmap($"data\\VinylPage{i}"));
+				Images.Add(new Bitmap($"data\\VinylPage{i}.jpeg"));
 			}
 		}
 

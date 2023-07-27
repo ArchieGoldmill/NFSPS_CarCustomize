@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -19,11 +21,15 @@ namespace CarCustomize
 
 		private List<ComboBox> partComboBoxes;
 
+		//private List<Button> colorButtons;
+
 		private Settings settings;
 
 		private bool updated;
 
 		private Form dialogForm;
+
+		private Dictionary<uint, string> cars;
 
 		public MainForm()
 		{
@@ -46,9 +52,8 @@ namespace CarCustomize
 				this.settings.Save();
 			}
 
-			this.connectBtn_Click();
-
 			this.partComboBoxes = new List<ComboBox>();
+			//this.colorButtons = new List<Button>();
 
 			this.InitComboBox(this.Body, Constants.BodyParts);
 
@@ -81,6 +86,8 @@ namespace CarCustomize
 
 			this.InitComboBox(this.LicensePlate, Constants.LicensePlate);
 
+			this.InitComboBox(this.RoofScoop, Constants.RoofScoopParts);
+
 			//this.InitComboBox(this.Engine, Constants.PerformanceParts);
 			//this.InitComboBox(this.Nos, Constants.PerformanceParts);
 			//this.InitComboBox(this.Drivetrain, Constants.PerformanceParts);
@@ -89,9 +96,9 @@ namespace CarCustomize
 			//this.InitComboBox(this.Turbo, Constants.PerformanceParts);
 			//this.InitComboBox(this.Brakes, Constants.PerformanceParts);
 
-			this.CarMode.DisplayMember = "Key";
-			this.CarMode.ValueMember = "Value";
-			this.CarMode.DataSource = new BindingSource(Constants.CarModes, null);
+			this.InitComboBox(this.CarMode, Constants.CarModes, false);
+
+			//this.colorButtons.Add(this.BodyColorBtn);
 
 			var vinylColImg = new DataGridViewImageColumn();
 			vinylColImg.ImageLayout = DataGridViewImageCellLayout.Stretch;
@@ -107,19 +114,17 @@ namespace CarCustomize
 
 			this.InitGrids();
 
+			this.connectBtn_Click();
+
 			this.carLocationUpdateTimer_Tick(null, null);
 			this.carLocationUpdateTimer.Enabled = true;
 
-			this.saveFileDialog.Filter = "NFS PS Car data|*.nfspscd";
-			this.saveFileDialog.Title = "Save car data";
-
-			this.openFileDialog.Filter = "NFS PS Car data|*.nfspscd";
-			this.openFileDialog.Title = "Open car data";
-
 			var perf = this.tabControl.TabPages[2];
 			var misc = this.tabControl.TabPages[3];
+			var paint = this.tabControl.TabPages[4];
 			this.tabControl.TabPages.Remove(perf);
 			this.tabControl.TabPages.Remove(misc);
+			this.tabControl.TabPages.Remove(paint);
 		}
 
 		private void InitGrids()
@@ -133,14 +138,57 @@ namespace CarCustomize
 			this.vinylsGrid.Columns[1].Width = this.vinylsGrid.Size.Width - this.settings.ImageSize - 25;
 		}
 
-		private void InitComboBox(ComboBox cb, object dictionary)
+		private void InitComboBox(ComboBox cb, object dictionary, bool bindEevents = true)
 		{
 			this.partComboBoxes.Add(cb);
 
 			cb.DisplayMember = "Key";
 			cb.ValueMember = "Value";
 			cb.DataSource = new BindingSource(dictionary, null);
-			cb.SelectedValueChanged += this.ComboBox_SelectedValueChanged;
+			if (bindEevents)
+			{
+				cb.SelectedValueChanged += this.ComboBox_SelectedValueChanged;
+			}
+		}
+
+		private void InitCars()
+		{
+			this.cars = new Dictionary<uint, string>();
+
+			var pList = Process.GetProcesses();
+
+			string path = null;
+			foreach (var process in pList)
+			{
+				if (process.ProcessName == this.settings.ProcessName)
+				{
+					path = process.MainModule.FileName;
+					break;
+				}
+			}
+
+			if (!string.IsNullOrEmpty(path))
+			{
+				string dir = Path.GetDirectoryName(path) + @"\CARS\";
+				var carDirs = Directory.GetDirectories(dir);
+				foreach (var carDir in carDirs)
+				{
+					var name = Path.GetFileName(carDir);
+					this.cars.Add(HashString(name), name);
+				}
+			}
+		}
+
+		private static uint HashString(string str)
+		{
+			uint result = uint.MaxValue;
+
+			foreach (char a in str)
+			{
+				result = unchecked(a + 33 * result);
+			}
+
+			return result;
 		}
 
 		private void carLocationUpdateTimer_Tick(object sender, EventArgs e)
@@ -171,11 +219,17 @@ namespace CarCustomize
 			this.carDataManager.Init();
 
 			var id = this.carDataManager.GetCurrentCarId();
-			if (Constants.CarList.ContainsKey(id))
+			if (id != 0 && id != int.MaxValue)
 			{
 				this.tabControl.Enabled = true;
 				int num = this.carDataManager.GetCarNum();
-				this.currentCarName.Text = Constants.CarList[id] + " (#" + num + ", Blueprint: " + (this.carDataManager.CarConfig + 1) + ")";
+				string carName = "";
+				if (this.cars.ContainsKey(id))
+				{
+					carName = this.cars[id];
+				}
+
+				this.currentCarName.Text = carName + " (#" + num + ", Blueprint: " + (this.carDataManager.CarConfig + 1) + ")";
 			}
 			else
 			{
@@ -190,6 +244,7 @@ namespace CarCustomize
 			{
 				this.memoryManager = new MemoryManager(this.settings.ProcessName);
 				this.carDataManager = new CarDataManager(this.memoryManager, this.carDataManager);
+				this.InitCars();
 
 				this.gameStatus.Text = "Connected";
 				this.carLocationUpdateTimer.Enabled = true;
@@ -243,6 +298,11 @@ namespace CarCustomize
 				comboBox.SelectedValue = this.carDataManager.GetPart(comboBox.Name);
 			}
 
+			//foreach (var button in this.colorButtons)
+			//{
+			//	button.BackColor = this.carDataManager.GetColor(button.Name.Substring(0, button.Name.Length - 8));
+			//}
+
 			this.CarMode.SelectedValue = this.carDataManager.CarMode;
 
 			this.UpdateVinylGrid(false);
@@ -282,7 +342,7 @@ namespace CarCustomize
 		private void ComboBox_SelectedValueChanged(object sender, EventArgs e)
 		{
 			ComboBox comboBox = (ComboBox)sender;
-			if (comboBox.SelectedValue == null)
+			if (this.carDataManager == null || comboBox.SelectedValue == null)
 			{
 				return;
 			}
@@ -292,7 +352,7 @@ namespace CarCustomize
 
 		private void CarMode_SelectedValueChanged(object sender, EventArgs e)
 		{
-			if (this.CarMode.SelectedValue == null)
+			if (this.carDataManager == null || this.CarMode.SelectedValue == null)
 			{
 				return;
 			}
@@ -313,12 +373,26 @@ namespace CarCustomize
 
 		private void PasteBtn_Click(object sender, EventArgs e)
 		{
-			DialogResult dialogResult = MessageBox.Show("Are you sure you want to paste to the current car?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-			if (dialogResult == DialogResult.Yes)
+			if (this.PasteVerify())
 			{
 				this.carDataManager.PasteCopyToCurrentCar();
 				this.UpdateForm();
 			}
+		}
+
+		private void PasteVinylBtn_Click(object sender, EventArgs e)
+		{
+			if (this.PasteVerify())
+			{
+				this.carDataManager.PasteCopyVinylToCurrentCar();
+				this.UpdateForm();
+			}
+		}
+
+		private bool PasteVerify()
+		{
+			var dialogResult = MessageBox.Show("Are you sure you want to paste to the current car?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			return dialogResult == DialogResult.Yes;
 		}
 
 		private void AboutBtn_Click(object sender, EventArgs e)
@@ -663,6 +737,22 @@ namespace CarCustomize
 				this.settings.ShowCarModesMessage = !form.DontShow;
 				this.settings.Save();
 			}
+		}
+
+		private void ColorBtnClick(object sender, EventArgs e)
+		{
+			var btn = sender as Button;
+
+			this.colorDialog.Color = btn.BackColor;
+			if (this.colorDialog.ShowDialog() == DialogResult.OK)
+			{
+				btn.BackColor = this.colorDialog.Color;
+			}
+
+			//this.dialogForm = new PartCustomizationForm(btn.Name.Substring(0, btn.Name.Length - 7), this.carDataManager);
+			//this.dialogForm.ShowDialog();
+
+			//this.dialogForm = null;
 		}
 	}
 }

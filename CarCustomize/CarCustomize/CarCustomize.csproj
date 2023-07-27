@@ -98,6 +98,7 @@
       <DependentUpon>VinylsChooserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="globalKeyboardHook.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

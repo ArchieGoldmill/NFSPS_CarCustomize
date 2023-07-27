@@ -38,6 +38,8 @@
 			this.connectBtn = new System.Windows.Forms.ToolStripMenuItem();
 			this.CopyBtn = new System.Windows.Forms.ToolStripMenuItem();
 			this.PasteBtn = new System.Windows.Forms.ToolStripMenuItem();
+			this.pasteAllBtn = new System.Windows.Forms.ToolStripMenuItem();
+			this.pasteVinylBtn = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lockunlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.SettingsBtn = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +50,14 @@
 			this.currentCarName = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.BodyTab = new System.Windows.Forms.TabPage();
+			this.RoofScoopEditBtn = new System.Windows.Forms.Button();
+			this.RoofScoop = new System.Windows.Forms.ComboBox();
+			this.label28 = new System.Windows.Forms.Label();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.RearWheelsEditBtn = new System.Windows.Forms.Button();
+			this.label27 = new System.Windows.Forms.Label();
+			this.FrontWheelsEditBtn = new System.Windows.Forms.Button();
+			this.label26 = new System.Windows.Forms.Label();
 			this.ExhaustEditBtn = new System.Windows.Forms.Button();
 			this.LicensePlate = new System.Windows.Forms.ComboBox();
 			this.asdase1231 = new System.Windows.Forms.Label();
@@ -120,28 +130,33 @@
 			this.vinylsGrid = new System.Windows.Forms.DataGridView();
 			this.label18 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
-			this.tabPage2 = new System.Windows.Forms.TabPage();
-			this.carDataModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.tabPage3 = new System.Windows.Forms.TabPage();
-			this.Engine = new System.Windows.Forms.ComboBox();
-			this.label21 = new System.Windows.Forms.Label();
-			this.Drivetrain = new System.Windows.Forms.ComboBox();
-			this.label22 = new System.Windows.Forms.Label();
-			this.Turbo = new System.Windows.Forms.ComboBox();
-			this.label23 = new System.Windows.Forms.Label();
-			this.Suspension = new System.Windows.Forms.ComboBox();
-			this.label24 = new System.Windows.Forms.Label();
-			this.Brakes = new System.Windows.Forms.ComboBox();
-			this.label25 = new System.Windows.Forms.Label();
+			this.PerformanceTab = new System.Windows.Forms.TabPage();
 			this.Nos = new System.Windows.Forms.ComboBox();
 			this.label29 = new System.Windows.Forms.Label();
 			this.Tires = new System.Windows.Forms.ComboBox();
 			this.label30 = new System.Windows.Forms.Label();
+			this.Brakes = new System.Windows.Forms.ComboBox();
+			this.label25 = new System.Windows.Forms.Label();
+			this.Suspension = new System.Windows.Forms.ComboBox();
+			this.label24 = new System.Windows.Forms.Label();
+			this.Turbo = new System.Windows.Forms.ComboBox();
+			this.label23 = new System.Windows.Forms.Label();
+			this.Drivetrain = new System.Windows.Forms.ComboBox();
+			this.label22 = new System.Windows.Forms.Label();
+			this.Engine = new System.Windows.Forms.ComboBox();
+			this.label21 = new System.Windows.Forms.Label();
+			this.MiscTab = new System.Windows.Forms.TabPage();
+			this.carDataModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.PaintsTab = new System.Windows.Forms.TabPage();
+			this.label31 = new System.Windows.Forms.Label();
+			this.BodyColorBtn = new System.Windows.Forms.Button();
+			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.menuStrip.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.BodyTab.SuspendLayout();
+			this.groupBox6.SuspendLayout();
 			this.groupBox5.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -151,8 +166,9 @@
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.decalsGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.vinylsGrid)).BeginInit();
-			this.tabPage2.SuspendLayout();
+			this.PerformanceTab.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.carDataModelBindingSource)).BeginInit();
+			this.PaintsTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -226,11 +242,27 @@
 			// 
 			// PasteBtn
 			// 
+			this.PasteBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pasteAllBtn,
+            this.pasteVinylBtn});
 			this.PasteBtn.Enabled = false;
 			this.PasteBtn.Name = "PasteBtn";
 			this.PasteBtn.Size = new System.Drawing.Size(53, 20);
 			this.PasteBtn.Text = "Paste  ";
-			this.PasteBtn.Click += new System.EventHandler(this.PasteBtn_Click);
+			// 
+			// pasteAllBtn
+			// 
+			this.pasteAllBtn.Name = "pasteAllBtn";
+			this.pasteAllBtn.Size = new System.Drawing.Size(100, 22);
+			this.pasteAllBtn.Text = "All";
+			this.pasteAllBtn.Click += new System.EventHandler(this.PasteBtn_Click);
+			// 
+			// pasteVinylBtn
+			// 
+			this.pasteVinylBtn.Name = "pasteVinylBtn";
+			this.pasteVinylBtn.Size = new System.Drawing.Size(100, 22);
+			this.pasteVinylBtn.Text = "Vinyl";
+			this.pasteVinylBtn.Click += new System.EventHandler(this.PasteVinylBtn_Click);
 			// 
 			// toolsToolStripMenuItem
 			// 
@@ -243,7 +275,7 @@
 			// lockunlockToolStripMenuItem
 			// 
 			this.lockunlockToolStripMenuItem.Name = "lockunlockToolStripMenuItem";
-			this.lockunlockToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+			this.lockunlockToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.lockunlockToolStripMenuItem.Text = "Lock/unlock";
 			this.lockunlockToolStripMenuItem.Click += new System.EventHandler(this.lockunlockToolStripMenuItem_Click);
 			// 
@@ -300,6 +332,10 @@
 			// 
 			// BodyTab
 			// 
+			this.BodyTab.Controls.Add(this.RoofScoopEditBtn);
+			this.BodyTab.Controls.Add(this.RoofScoop);
+			this.BodyTab.Controls.Add(this.label28);
+			this.BodyTab.Controls.Add(this.groupBox6);
 			this.BodyTab.Controls.Add(this.ExhaustEditBtn);
 			this.BodyTab.Controls.Add(this.LicensePlate);
 			this.BodyTab.Controls.Add(this.asdase1231);
@@ -326,10 +362,96 @@
 			this.BodyTab.Margin = new System.Windows.Forms.Padding(2);
 			this.BodyTab.Name = "BodyTab";
 			this.BodyTab.Padding = new System.Windows.Forms.Padding(2);
-			this.BodyTab.Size = new System.Drawing.Size(551, 401);
+			this.BodyTab.Size = new System.Drawing.Size(551, 400);
 			this.BodyTab.TabIndex = 0;
 			this.BodyTab.Text = "Car parts";
 			this.BodyTab.UseVisualStyleBackColor = true;
+			// 
+			// RoofScoopEditBtn
+			// 
+			this.RoofScoopEditBtn.Location = new System.Drawing.Point(456, 307);
+			this.RoofScoopEditBtn.Margin = new System.Windows.Forms.Padding(2);
+			this.RoofScoopEditBtn.Name = "RoofScoopEditBtn";
+			this.RoofScoopEditBtn.Size = new System.Drawing.Size(22, 19);
+			this.RoofScoopEditBtn.TabIndex = 52;
+			this.RoofScoopEditBtn.Text = "...";
+			this.RoofScoopEditBtn.UseVisualStyleBackColor = true;
+			this.RoofScoopEditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+			// 
+			// RoofScoop
+			// 
+			this.RoofScoop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.RoofScoop.FormattingEnabled = true;
+			this.RoofScoop.Location = new System.Drawing.Point(373, 307);
+			this.RoofScoop.Margin = new System.Windows.Forms.Padding(2);
+			this.RoofScoop.Name = "RoofScoop";
+			this.RoofScoop.Size = new System.Drawing.Size(76, 21);
+			this.RoofScoop.TabIndex = 51;
+			// 
+			// label28
+			// 
+			this.label28.AutoSize = true;
+			this.label28.Location = new System.Drawing.Point(308, 310);
+			this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label28.Name = "label28";
+			this.label28.Size = new System.Drawing.Size(62, 13);
+			this.label28.TabIndex = 50;
+			this.label28.Text = "Roof scoop";
+			// 
+			// groupBox6
+			// 
+			this.groupBox6.Controls.Add(this.RearWheelsEditBtn);
+			this.groupBox6.Controls.Add(this.label27);
+			this.groupBox6.Controls.Add(this.FrontWheelsEditBtn);
+			this.groupBox6.Controls.Add(this.label26);
+			this.groupBox6.Location = new System.Drawing.Point(6, 280);
+			this.groupBox6.Name = "groupBox6";
+			this.groupBox6.Size = new System.Drawing.Size(79, 85);
+			this.groupBox6.TabIndex = 49;
+			this.groupBox6.TabStop = false;
+			this.groupBox6.Text = "Wheels";
+			// 
+			// RearWheelsEditBtn
+			// 
+			this.RearWheelsEditBtn.Location = new System.Drawing.Point(43, 47);
+			this.RearWheelsEditBtn.Margin = new System.Windows.Forms.Padding(2);
+			this.RearWheelsEditBtn.Name = "RearWheelsEditBtn";
+			this.RearWheelsEditBtn.Size = new System.Drawing.Size(22, 19);
+			this.RearWheelsEditBtn.TabIndex = 52;
+			this.RearWheelsEditBtn.Text = "...";
+			this.RearWheelsEditBtn.UseVisualStyleBackColor = true;
+			this.RearWheelsEditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+			// 
+			// label27
+			// 
+			this.label27.AutoSize = true;
+			this.label27.Location = new System.Drawing.Point(14, 50);
+			this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label27.Name = "label27";
+			this.label27.Size = new System.Drawing.Size(25, 13);
+			this.label27.TabIndex = 51;
+			this.label27.Text = "rear";
+			// 
+			// FrontWheelsEditBtn
+			// 
+			this.FrontWheelsEditBtn.Location = new System.Drawing.Point(43, 24);
+			this.FrontWheelsEditBtn.Margin = new System.Windows.Forms.Padding(2);
+			this.FrontWheelsEditBtn.Name = "FrontWheelsEditBtn";
+			this.FrontWheelsEditBtn.Size = new System.Drawing.Size(22, 19);
+			this.FrontWheelsEditBtn.TabIndex = 50;
+			this.FrontWheelsEditBtn.Text = "...";
+			this.FrontWheelsEditBtn.UseVisualStyleBackColor = true;
+			this.FrontWheelsEditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+			// 
+			// label26
+			// 
+			this.label26.AutoSize = true;
+			this.label26.Location = new System.Drawing.Point(11, 27);
+			this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label26.Name = "label26";
+			this.label26.Size = new System.Drawing.Size(28, 13);
+			this.label26.TabIndex = 20;
+			this.label26.Text = "front";
 			// 
 			// ExhaustEditBtn
 			// 
@@ -898,14 +1020,15 @@
 			// 
 			this.tabControl.Controls.Add(this.BodyTab);
 			this.tabControl.Controls.Add(this.tabPage1);
-			this.tabControl.Controls.Add(this.tabPage2);
-			this.tabControl.Controls.Add(this.tabPage3);
-			this.tabControl.Location = new System.Drawing.Point(0, 25);
+			this.tabControl.Controls.Add(this.PerformanceTab);
+			this.tabControl.Controls.Add(this.MiscTab);
+			this.tabControl.Controls.Add(this.PaintsTab);
+			this.tabControl.Location = new System.Drawing.Point(0, 26);
 			this.tabControl.Margin = new System.Windows.Forms.Padding(2);
 			this.tabControl.Name = "tabControl";
 			this.tabControl.RightToLeftLayout = true;
 			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(559, 427);
+			this.tabControl.Size = new System.Drawing.Size(559, 426);
 			this.tabControl.TabIndex = 1;
 			// 
 			// tabPage1
@@ -932,7 +1055,7 @@
 			this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-			this.tabPage1.Size = new System.Drawing.Size(551, 401);
+			this.tabPage1.Size = new System.Drawing.Size(551, 400);
 			this.tabPage1.TabIndex = 1;
 			this.tabPage1.Text = "Livery";
 			this.tabPage1.UseVisualStyleBackColor = true;
@@ -1157,143 +1280,29 @@
 			this.label15.TabIndex = 2;
 			this.label15.Text = "Vinyls:";
 			// 
-			// tabPage2
+			// PerformanceTab
 			// 
-			this.tabPage2.Controls.Add(this.Nos);
-			this.tabPage2.Controls.Add(this.label29);
-			this.tabPage2.Controls.Add(this.Tires);
-			this.tabPage2.Controls.Add(this.label30);
-			this.tabPage2.Controls.Add(this.Brakes);
-			this.tabPage2.Controls.Add(this.label25);
-			this.tabPage2.Controls.Add(this.Suspension);
-			this.tabPage2.Controls.Add(this.label24);
-			this.tabPage2.Controls.Add(this.Turbo);
-			this.tabPage2.Controls.Add(this.label23);
-			this.tabPage2.Controls.Add(this.Drivetrain);
-			this.tabPage2.Controls.Add(this.label22);
-			this.tabPage2.Controls.Add(this.Engine);
-			this.tabPage2.Controls.Add(this.label21);
-			this.tabPage2.Location = new System.Drawing.Point(4, 22);
-			this.tabPage2.Name = "tabPage2";
-			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(551, 401);
-			this.tabPage2.TabIndex = 2;
-			this.tabPage2.Text = "Performance";
-			this.tabPage2.UseVisualStyleBackColor = true;
-			// 
-			// openFileDialog
-			// 
-			this.openFileDialog.FileName = "openFileDialog";
-			// 
-			// tabPage3
-			// 
-			this.tabPage3.Location = new System.Drawing.Point(4, 22);
-			this.tabPage3.Name = "tabPage3";
-			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage3.Size = new System.Drawing.Size(551, 401);
-			this.tabPage3.TabIndex = 3;
-			this.tabPage3.Text = "Misc parts";
-			this.tabPage3.UseVisualStyleBackColor = true;
-			// 
-			// Engine
-			// 
-			this.Engine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.Engine.FormattingEnabled = true;
-			this.Engine.Location = new System.Drawing.Point(87, 19);
-			this.Engine.Margin = new System.Windows.Forms.Padding(2);
-			this.Engine.Name = "Engine";
-			this.Engine.Size = new System.Drawing.Size(76, 21);
-			this.Engine.TabIndex = 9;
-			// 
-			// label21
-			// 
-			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(43, 22);
-			this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(40, 13);
-			this.label21.TabIndex = 8;
-			this.label21.Text = "Engine";
-			// 
-			// Drivetrain
-			// 
-			this.Drivetrain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.Drivetrain.FormattingEnabled = true;
-			this.Drivetrain.Location = new System.Drawing.Point(87, 59);
-			this.Drivetrain.Margin = new System.Windows.Forms.Padding(2);
-			this.Drivetrain.Name = "Drivetrain";
-			this.Drivetrain.Size = new System.Drawing.Size(76, 21);
-			this.Drivetrain.TabIndex = 11;
-			// 
-			// label22
-			// 
-			this.label22.AutoSize = true;
-			this.label22.Location = new System.Drawing.Point(31, 62);
-			this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.label22.Name = "label22";
-			this.label22.Size = new System.Drawing.Size(52, 13);
-			this.label22.TabIndex = 10;
-			this.label22.Text = "Drivetrain";
-			// 
-			// Turbo
-			// 
-			this.Turbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.Turbo.FormattingEnabled = true;
-			this.Turbo.Location = new System.Drawing.Point(87, 104);
-			this.Turbo.Margin = new System.Windows.Forms.Padding(2);
-			this.Turbo.Name = "Turbo";
-			this.Turbo.Size = new System.Drawing.Size(76, 21);
-			this.Turbo.TabIndex = 13;
-			// 
-			// label23
-			// 
-			this.label23.AutoSize = true;
-			this.label23.Location = new System.Drawing.Point(48, 107);
-			this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.label23.Name = "label23";
-			this.label23.Size = new System.Drawing.Size(35, 13);
-			this.label23.TabIndex = 12;
-			this.label23.Text = "Turbo";
-			// 
-			// Suspension
-			// 
-			this.Suspension.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.Suspension.FormattingEnabled = true;
-			this.Suspension.Location = new System.Drawing.Point(87, 157);
-			this.Suspension.Margin = new System.Windows.Forms.Padding(2);
-			this.Suspension.Name = "Suspension";
-			this.Suspension.Size = new System.Drawing.Size(76, 21);
-			this.Suspension.TabIndex = 15;
-			// 
-			// label24
-			// 
-			this.label24.AutoSize = true;
-			this.label24.Location = new System.Drawing.Point(21, 160);
-			this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.label24.Name = "label24";
-			this.label24.Size = new System.Drawing.Size(62, 13);
-			this.label24.TabIndex = 14;
-			this.label24.Text = "Suspension";
-			// 
-			// Brakes
-			// 
-			this.Brakes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.Brakes.FormattingEnabled = true;
-			this.Brakes.Location = new System.Drawing.Point(421, 104);
-			this.Brakes.Margin = new System.Windows.Forms.Padding(2);
-			this.Brakes.Name = "Brakes";
-			this.Brakes.Size = new System.Drawing.Size(76, 21);
-			this.Brakes.TabIndex = 17;
-			// 
-			// label25
-			// 
-			this.label25.AutoSize = true;
-			this.label25.Location = new System.Drawing.Point(377, 107);
-			this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-			this.label25.Name = "label25";
-			this.label25.Size = new System.Drawing.Size(40, 13);
-			this.label25.TabIndex = 16;
-			this.label25.Text = "Brakes";
+			this.PerformanceTab.Controls.Add(this.Nos);
+			this.PerformanceTab.Controls.Add(this.label29);
+			this.PerformanceTab.Controls.Add(this.Tires);
+			this.PerformanceTab.Controls.Add(this.label30);
+			this.PerformanceTab.Controls.Add(this.Brakes);
+			this.PerformanceTab.Controls.Add(this.label25);
+			this.PerformanceTab.Controls.Add(this.Suspension);
+			this.PerformanceTab.Controls.Add(this.label24);
+			this.PerformanceTab.Controls.Add(this.Turbo);
+			this.PerformanceTab.Controls.Add(this.label23);
+			this.PerformanceTab.Controls.Add(this.Drivetrain);
+			this.PerformanceTab.Controls.Add(this.label22);
+			this.PerformanceTab.Controls.Add(this.Engine);
+			this.PerformanceTab.Controls.Add(this.label21);
+			this.PerformanceTab.Location = new System.Drawing.Point(4, 22);
+			this.PerformanceTab.Name = "PerformanceTab";
+			this.PerformanceTab.Padding = new System.Windows.Forms.Padding(3);
+			this.PerformanceTab.Size = new System.Drawing.Size(551, 400);
+			this.PerformanceTab.TabIndex = 2;
+			this.PerformanceTab.Text = "Performance";
+			this.PerformanceTab.UseVisualStyleBackColor = true;
 			// 
 			// Nos
 			// 
@@ -1335,14 +1344,165 @@
 			this.label30.TabIndex = 18;
 			this.label30.Text = "Tires";
 			// 
+			// Brakes
+			// 
+			this.Brakes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.Brakes.FormattingEnabled = true;
+			this.Brakes.Location = new System.Drawing.Point(421, 104);
+			this.Brakes.Margin = new System.Windows.Forms.Padding(2);
+			this.Brakes.Name = "Brakes";
+			this.Brakes.Size = new System.Drawing.Size(76, 21);
+			this.Brakes.TabIndex = 17;
+			// 
+			// label25
+			// 
+			this.label25.AutoSize = true;
+			this.label25.Location = new System.Drawing.Point(377, 107);
+			this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label25.Name = "label25";
+			this.label25.Size = new System.Drawing.Size(40, 13);
+			this.label25.TabIndex = 16;
+			this.label25.Text = "Brakes";
+			// 
+			// Suspension
+			// 
+			this.Suspension.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.Suspension.FormattingEnabled = true;
+			this.Suspension.Location = new System.Drawing.Point(87, 157);
+			this.Suspension.Margin = new System.Windows.Forms.Padding(2);
+			this.Suspension.Name = "Suspension";
+			this.Suspension.Size = new System.Drawing.Size(76, 21);
+			this.Suspension.TabIndex = 15;
+			// 
+			// label24
+			// 
+			this.label24.AutoSize = true;
+			this.label24.Location = new System.Drawing.Point(21, 160);
+			this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label24.Name = "label24";
+			this.label24.Size = new System.Drawing.Size(62, 13);
+			this.label24.TabIndex = 14;
+			this.label24.Text = "Suspension";
+			// 
+			// Turbo
+			// 
+			this.Turbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.Turbo.FormattingEnabled = true;
+			this.Turbo.Location = new System.Drawing.Point(87, 104);
+			this.Turbo.Margin = new System.Windows.Forms.Padding(2);
+			this.Turbo.Name = "Turbo";
+			this.Turbo.Size = new System.Drawing.Size(76, 21);
+			this.Turbo.TabIndex = 13;
+			// 
+			// label23
+			// 
+			this.label23.AutoSize = true;
+			this.label23.Location = new System.Drawing.Point(48, 107);
+			this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(35, 13);
+			this.label23.TabIndex = 12;
+			this.label23.Text = "Turbo";
+			// 
+			// Drivetrain
+			// 
+			this.Drivetrain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.Drivetrain.FormattingEnabled = true;
+			this.Drivetrain.Location = new System.Drawing.Point(87, 59);
+			this.Drivetrain.Margin = new System.Windows.Forms.Padding(2);
+			this.Drivetrain.Name = "Drivetrain";
+			this.Drivetrain.Size = new System.Drawing.Size(76, 21);
+			this.Drivetrain.TabIndex = 11;
+			// 
+			// label22
+			// 
+			this.label22.AutoSize = true;
+			this.label22.Location = new System.Drawing.Point(31, 62);
+			this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(52, 13);
+			this.label22.TabIndex = 10;
+			this.label22.Text = "Drivetrain";
+			// 
+			// Engine
+			// 
+			this.Engine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.Engine.FormattingEnabled = true;
+			this.Engine.Location = new System.Drawing.Point(87, 19);
+			this.Engine.Margin = new System.Windows.Forms.Padding(2);
+			this.Engine.Name = "Engine";
+			this.Engine.Size = new System.Drawing.Size(76, 21);
+			this.Engine.TabIndex = 9;
+			// 
+			// label21
+			// 
+			this.label21.AutoSize = true;
+			this.label21.Location = new System.Drawing.Point(43, 22);
+			this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(40, 13);
+			this.label21.TabIndex = 8;
+			this.label21.Text = "Engine";
+			// 
+			// MiscTab
+			// 
+			this.MiscTab.Location = new System.Drawing.Point(4, 22);
+			this.MiscTab.Name = "MiscTab";
+			this.MiscTab.Padding = new System.Windows.Forms.Padding(3);
+			this.MiscTab.Size = new System.Drawing.Size(551, 400);
+			this.MiscTab.TabIndex = 3;
+			this.MiscTab.Text = "Misc parts";
+			this.MiscTab.UseVisualStyleBackColor = true;
+			// 
+			// openFileDialog
+			// 
+			this.openFileDialog.FileName = "openFileDialog";
+			this.openFileDialog.Filter = "NFS PS Car data|*.nfspscd";
+			this.openFileDialog.Title = "Open car data";
+			// 
+			// saveFileDialog
+			// 
+			this.saveFileDialog.Filter = "NFS PS Car data|*.nfspscd";
+			this.saveFileDialog.Title = "Save car data";
+			// 
+			// PaintsTab
+			// 
+			this.PaintsTab.Controls.Add(this.BodyColorBtn);
+			this.PaintsTab.Controls.Add(this.label31);
+			this.PaintsTab.Location = new System.Drawing.Point(4, 22);
+			this.PaintsTab.Name = "PaintsTab";
+			this.PaintsTab.Padding = new System.Windows.Forms.Padding(3);
+			this.PaintsTab.Size = new System.Drawing.Size(551, 400);
+			this.PaintsTab.TabIndex = 4;
+			this.PaintsTab.Text = "Paints";
+			this.PaintsTab.UseVisualStyleBackColor = true;
+			// 
+			// label31
+			// 
+			this.label31.AutoSize = true;
+			this.label31.Location = new System.Drawing.Point(22, 31);
+			this.label31.Name = "label31";
+			this.label31.Size = new System.Drawing.Size(31, 13);
+			this.label31.TabIndex = 0;
+			this.label31.Text = "Body";
+			// 
+			// BodyColorBtn
+			// 
+			this.BodyColorBtn.Location = new System.Drawing.Point(59, 26);
+			this.BodyColorBtn.Name = "BodyColorBtn";
+			this.BodyColorBtn.Size = new System.Drawing.Size(75, 23);
+			this.BodyColorBtn.TabIndex = 1;
+			this.BodyColorBtn.UseVisualStyleBackColor = true;
+			this.BodyColorBtn.Click += new System.EventHandler(this.ColorBtnClick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(559, 474);
+			this.Controls.Add(this.menuStrip);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.tabControl);
-			this.Controls.Add(this.menuStrip);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MainMenuStrip = this.menuStrip;
 			this.Margin = new System.Windows.Forms.Padding(2);
@@ -1357,6 +1517,8 @@
 			this.statusStrip1.PerformLayout();
 			this.BodyTab.ResumeLayout(false);
 			this.BodyTab.PerformLayout();
+			this.groupBox6.ResumeLayout(false);
+			this.groupBox6.PerformLayout();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
@@ -1372,9 +1534,11 @@
 			this.tabPage1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.decalsGrid)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.vinylsGrid)).EndInit();
-			this.tabPage2.ResumeLayout(false);
-			this.tabPage2.PerformLayout();
+			this.PerformanceTab.ResumeLayout(false);
+			this.PerformanceTab.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.carDataModelBindingSource)).EndInit();
+			this.PaintsTab.ResumeLayout(false);
+			this.PaintsTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1475,11 +1639,11 @@
 		private System.Windows.Forms.ComboBox CarMode;
 		private System.Windows.Forms.ComboBox LicensePlate;
 		private System.Windows.Forms.Label asdase1231;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage PerformanceTab;
         private System.Windows.Forms.Button ExhaustEditBtn;
 		private System.Windows.Forms.ComboBox Engine;
 		private System.Windows.Forms.Label label21;
-		private System.Windows.Forms.TabPage tabPage3;
+		private System.Windows.Forms.TabPage MiscTab;
 		private System.Windows.Forms.ComboBox Suspension;
 		private System.Windows.Forms.Label label24;
 		private System.Windows.Forms.ComboBox Turbo;
@@ -1492,6 +1656,20 @@
 		private System.Windows.Forms.Label label30;
 		private System.Windows.Forms.ComboBox Brakes;
 		private System.Windows.Forms.Label label25;
+		private System.Windows.Forms.ToolStripMenuItem pasteAllBtn;
+		private System.Windows.Forms.ToolStripMenuItem pasteVinylBtn;
+		private System.Windows.Forms.GroupBox groupBox6;
+		private System.Windows.Forms.Label label26;
+		private System.Windows.Forms.Button RearWheelsEditBtn;
+		private System.Windows.Forms.Label label27;
+		private System.Windows.Forms.Button FrontWheelsEditBtn;
+		private System.Windows.Forms.Button RoofScoopEditBtn;
+		private System.Windows.Forms.ComboBox RoofScoop;
+		private System.Windows.Forms.Label label28;
+		private System.Windows.Forms.TabPage PaintsTab;
+		private System.Windows.Forms.Button BodyColorBtn;
+		private System.Windows.Forms.Label label31;
+		private System.Windows.Forms.ColorDialog colorDialog;
 	}
 }
 

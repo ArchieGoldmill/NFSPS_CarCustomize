@@ -49,6 +49,7 @@ namespace CarCustomize
 			{"RollCage", new CarPart {Offset = 0xD6, Code = 0x2B}},
 			{"Exhaust", new CarPart {Offset = 0xC4, Code = 0x15}},
 			{"LicensePlate", new CarPart {Offset = 0xD4, Code = 0x16}},
+			{"RoofScoop", new CarPart {Offset = 0xDC, Code = 0x29}},
 
 			{"Engine", new CarPart {Offset = 0x12C, Code = 0x66}},
 			{"Drivetrain", new CarPart {Offset = 0x12A, Code = 0x4B}},
@@ -57,12 +58,12 @@ namespace CarCustomize
 			{"Brakes", new CarPart {Offset = 0x48, Code = 0x31}},
 			{"Tires", new CarPart {Offset = 0x15E, Code = 0x4A}},
 			{"Nos", new CarPart {Offset = 0x13A, Code = 0x65}},
-			{"RoofScoop", new CarPart {Offset = 0xDC, Code = 0x29}},
 			{"WheelsFront", new CarPart {Offset = 0xF2, Code = 0x38}},
 			{"WheelsRear", new CarPart {Offset = 0xF4, Code = 0x5C}},
 		};
 
 		public static int HueMax = 0x59;
+		public static int VinylsSectionSize = 0x328;
 		public static int VinylsLocation = 0x238;
 		public static int VinylsMirrorLocation = 0x440;
 		public static int VinylsCountLocation = 0x444;
@@ -99,12 +100,18 @@ namespace CarCustomize
 			{"Color4_Brightness", 25},
 		};
 
+		public static Dictionary<string, int> Colors = new Dictionary<string, int>
+		{
+			{"Body", 0x118},
+		};
+
 		public static Dictionary<string, int> Carbon = new Dictionary<string, int>
 		{
 			{"Hood", 0x223},
 			{"BumperFront", 0x220},
 			{"BumperRear", 0x221},
-			{"Skirts", 0x222}
+			{"Skirts", 0x222},
+			{"RoofScoop", 0x227},
 		};
 
 		public static Dictionary<string, int> Autosculpt = new Dictionary<string, int>
@@ -115,6 +122,9 @@ namespace CarCustomize
 			{"Skirts", 0x582},
 			{"Spoiler", 0x5FB},
 			{"Exhaust", 0x61C},
+			{"FrontWheels", 0x598},
+			{"RearWheels", 0x5A3},
+			{"RoofScoop", 0x606},
 		};
 
 		public static Dictionary<string, byte> BodyParts = new Dictionary<string, byte>
@@ -159,14 +169,28 @@ namespace CarCustomize
 
 		public static Dictionary<string, byte> RollCageParts = new Dictionary<string, byte>
 		{
+			{"None", NonePart},
 			{"Default", 0xff},
 			{"Stock", 0},
 			{"Kit 1", 0x10},
 			{"Kit 2", 0x20},
 		};
 
+		public static Dictionary<string, byte> RoofScoopParts = new Dictionary<string, byte>
+		{
+			{"None", NonePart},
+			{"Default", 0xff},
+			{"Stock", 0},
+			{"Kit 1", 0x1},
+			{"Kit 2", 0x2},
+			{"Kit 3", 0x3},
+			{"Kit 4", 0x4},
+			{"Kit 5", 0x5},
+		};
+
 		public static Dictionary<string, byte> SeatParts = new Dictionary<string, byte>
 		{
+			{"None", NonePart},
 			{"Default", 0xff},
 			{"Stock", 0},
 			{"Kit 1", 0x11},
@@ -236,86 +260,6 @@ namespace CarCustomize
 			{"Tier 3 (1)", 0x7},
 			{"Tier 3 (2)", 0x8},
 			{"Tier 3 (3)", 0x9},
-		};
-
-		public static Dictionary<uint, string> CarList = new Dictionary<uint, string>
-		{
-			{22084480, "Nissan 240SX"},
-			{706257, "Nissan 350Z"},
-			{1008903605, "Porsche 997GT2"},
-			{1008903606, "Porsche 997GT3"},
-			{3479369243, "Porsche 997GT3RS"},
-			{30573264, "Porsche 997TT"},
-			{41999877, "BMW M3 E46"},
-			{1816135925, "BMW M3 E92"},
-			{1385997280, "BMW M Z4"},
-			{1410528946, "Chevrolet CAMARO SS"},
-			{3597782336, "Chevrolet CAMARO"},
-			{3787143290, "Porsche Carrera GT"},
-			{3612426091, "Porsche Cayman S"},
-			{39325, "Koenigsegg  CCX"},
-			{1008844988, "Dodge Challenger 1971"},
-			{290872130, "Dodge Challenger"},
-			{990337002, "Dodge Charger 1969"},
-			{2924392039, "Chevrolet Chevelle"},
-			{3921809687, "Honda Civic"},
-			{3921810057, "Honda Civic SI"},
-			{3232683226, "Chevrolet Cobalt SS"},
-			{4152103915, "Toyota Corolla"},
-			{3883502315, "Chevrolet Corvette"},
-			{2886203608, "Chevrolet Corvette 1967"},
-			{755477579, "Chevrolet Corvette Z06"},
-			{3924180824, "Ford Escort Cosworth"},
-			{1316159, "Cadillac CTSV"},
-			{1316732, "Plymouth HEMI Cuda"},
-			{40350, "Aston Martin DB9"},
-			{1332432, "Aston Martin DBR9"},
-			{44072489, "Lancia Delta Integrale"},
-			{1963121284, "Mitsubishi Eclipse"},
-			{45506673, "Lotus Elise"},
-			{3713975206, "Ford Focus ST"},
-			{1544720613, "Ford GT"},
-			{43118, "Infiniti G35"},
-			{3616032760, "Lamborghini Gallardo"},
-			{44227, "Wolksvagen Golf GTI"},
-			{44233, "Pontiac GTO"},
-			{48171572, "Pontiac GTO65"},
-			{419333856, "Nissan GTR PROTO"},
-			{3918447144, "Subaru Impreza WRX STI"},
-			{398674152, "Honda Integra"},
-			{3446860733, "Honda Integra TYPE-R"},
-			{50476947, "Lexus IS350"},
-			{164818935, "Mitsubishi Evolution 9"},
-			{164818966, "Mitsubishi Evolution X"},
-			{3132940680, "Seat Leon Cupra"},
-			{4207840464, "Mazda Speed 3"},
-			{1383760312, "McLaren F1"},
-			{133082177, "Lamborghini Murciélago 640"},
-			{890656001, "Ford Mustang 2003"},
-			{890656793, "Ford Mustang GT"},
-			{630607726, "Shelby Mustang"},
-			{630607727, "Shelby Mustang 1967"},
-			{51832, "Acura NSX"},
-			{1987012766, "Audi R8"},
-			{55094, "Wolksvagen Golf R32"},
-			{3977320447, "Plymouth ROADRUNNER"},
-			{56152, "Audi RS4"},
-			{56188, "Acura RSX"},
-			{56320, "Mazda RX7"},
-			{56321, "Mazda RX8"},
-			{1701, "Audi S3"},
-			{1702, "Audi S4"},
-			{61146804, "Honda S2000"},
-			{2046169223, "Nissan SILVIA"},
-			{3192403806, "Nissan SKYLINE GTR R34"},
-			{2544223800, "Nissan GTR"},
-			{1881449, "Mercedes SL65"},
-			{1794097140, "Pontiac Solstice GXP"},
-			{62440586, "Toyota SUPRA"},
-			{58389, "Audi TT"},
-			{2159294754, "Bugatti Veyron"},
-			{65566693, "Dodge Viper"},
-			{70523771, "Pagani Zonda"}
 		};
 	}
 }
