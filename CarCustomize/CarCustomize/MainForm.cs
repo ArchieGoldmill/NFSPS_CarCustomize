@@ -118,13 +118,6 @@ namespace CarCustomize
 
 			this.carLocationUpdateTimer_Tick(null, null);
 			this.carLocationUpdateTimer.Enabled = true;
-
-			var perf = this.tabControl.TabPages[2];
-			var misc = this.tabControl.TabPages[3];
-			var paint = this.tabControl.TabPages[4];
-			this.tabControl.TabPages.Remove(perf);
-			this.tabControl.TabPages.Remove(misc);
-			this.tabControl.TabPages.Remove(paint);
 		}
 
 		private void InitGrids()
@@ -251,6 +244,7 @@ namespace CarCustomize
 				this.connectBtn.Visible = false;
 				this.tabControl.Enabled = true;
 				this.CopyBtn.Enabled = true;
+				this.toolsToolStripMenuItem.Enabled = true;
 
 				if (this.carDataManager.CanPaste)
 				{
@@ -276,6 +270,7 @@ namespace CarCustomize
 			this.CopyBtn.Enabled = false;
 			this.PasteBtn.Enabled = false;
 			this.tabControl.Enabled = false;
+			this.toolsToolStripMenuItem.Enabled = false;
 		}
 
 		private bool IsGameActive()

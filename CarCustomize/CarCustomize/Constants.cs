@@ -69,6 +69,7 @@ namespace CarCustomize
 		public static int VinylsCountLocation = 0x444;
 		public static int VinylSize = 26;
 		public static int DecalsLocation = 0x448;
+		public static int DecalsSectionSize = 0x120;
 		public static int DecalsMirrorLocation = 0x560;
 		public static int DecalsCountLocation = 0x564;
 		public static int DecalSize = 14;

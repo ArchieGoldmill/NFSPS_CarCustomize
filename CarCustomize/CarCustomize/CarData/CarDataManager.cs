@@ -343,6 +343,8 @@ namespace CarCustomize.CarData
 		{
 			this.memoryManager.WriteBytes(new IntPtr(this.CarPointer + Constants.VinylsLocation), 
 				this.copy.Skip(Constants.VinylsLocation).Take(Constants.VinylsSectionSize).ToArray());
+			this.memoryManager.WriteBytes(new IntPtr(this.CarPointer + Constants.DecalsLocation),
+				this.copy.Skip(Constants.DecalsLocation).Take(Constants.DecalsSectionSize).ToArray());
 
 			this.FixCarParts();
 		}
